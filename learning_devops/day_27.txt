@@ -1,0 +1,2 @@
+//learning about bind mounts and volumes in docker
+//bind mounts are used to share files between host and container and volumes are used to share files between containers.

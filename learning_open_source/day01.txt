@@ -1,0 +1,4 @@
+workflow of open source .
+1. find the repository you want to contribute to
+2. find the issue you want to work on, every issue has a unique id (e.g. 1234)
+ 

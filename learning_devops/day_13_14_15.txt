@@ -1,0 +1,29 @@
+//configuration management in devops - use of ansible 
+-> firstly we need to install ansible in our system by the command: sudo apt install ansible
+-> create two ec2 instances , one as ansible-server and other as target-machine
+-> generate ssh key in ansible-server with the command: ssh-keygen
+-> open the /home/ubuntu/.ssh/id_rsa.pub file and copy the key , 
+ and paste the key to /home/ubuntu/.ssh/authorized_keys file of target-machine
+-> in ansible-server run the command: ssh 172.31.41.211    (here 172.31.41.211 is target machine's private ip, this command will connect to target-machine)
+hence, we have successfully connected to target-machine from ansible-server without password
+now create a file named 'inventory' and write the private ip of target-machine in it
+
+now we can write ansible adhoc commands in ansible-server to run on target-machine like:
+ansible -i inventory all -m "shell" -a "ls -a"  (here -i is for inventory file, -m is for module, -a is for argument)
+ansible -i inventory all -m "shell" -a "sudo apt-get update -y"  (here -y is for yes)
+
+or we can write ansible playbook to run on target-machine like:
+create a file named 'playbook.yml' and write the following code in it:
+---
+- name: install and start nginx
+  hosts: all
+  become: true
+  tasks:
+    - name: install nginx
+      apt: name=nginx state=present
+    - name: start nginx
+      service: name=nginx state=started
+
+now run the command: ansible-playbook -i inventory playbook.yml
+now we can see that nginx is installed and started in target-machine, 
+ to check it run the command in target machine: sudo systemctl status nginx

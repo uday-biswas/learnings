@@ -1,0 +1,14 @@
+//deploying first app in aws
+-> login to aws console, go to IAM, go to users, create a user, give a username
+, tick on provide user access to aws management console, give a custom password,
+untick on require password reset, click on next, tick on attach existing policies directly,
+search for administrator access, tick on it, click on next, click on create user,
+download the csv file, click on close, click on users, click on the user, click on security credentials,
+get the url of the console login, login with the username and password, click on services,
+click on ec2, click on launch instance, create a new ubuntu ec2 instance.
+-> connect to the instance using ssh, install nodejs, install npm.
+-> clone the project from github, provide .env file, run npm install, run the project.
+-> go to security groups, click on the security group, click on inbound, click on edit inbound rules, click on add rule,
+select tcp, select port range 3000, select source anywhere, click on save rules.
+-> go to elastic ip, click on allocate new address, click on allocate, click on actions, click on associate address,
+select the instance, click on associate, copy the public ip, paste it in the browser, the app will be running.
