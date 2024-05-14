@@ -1,0 +1,17 @@
+//learning RBAC(role based access and control) for kubernetes
+-> it is used to provide access to different services according to their roles.
+-> mainly there are 3 things to be controlled by the RBAC 
+   - service account / user account 
+   - Roles / cluster role
+   - Role binding / cluster role binding
+
+-> to get 30 days free trial, open openshift sandbox, and make a red hat account
+   login there and launch a sandbox.
+
+
+
+//learning about custom resource definition
+-> it is used to create a new resource type in kubernetes.
+
+//learning configmap and secret
+-> configmap is used to store the configuration of the application.

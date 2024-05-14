@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>hello</p>
+
+    <script>
+        async function myFunction() {       //async function is declared
+            let delhiMausam = await new Promise(function (resolve, reject) {   //promise is declared
+                setTimeout(function () {                                 //set timeout is added to the task queue, at t=3000ms it will be pushed to the call stack    
+                    resolve('delhi mausam is good')
+                }, 3000)
+            })
+            // console.log(delhiMausam);       //the value is printed at t = 3000ms
+
+            let hyderabadMausam = await new Promise(function (resolve, reject) {   //promise is declared
+                setTimeout(function () {                                 //set timeout is added to the task queue, at t=3000ms it will be pushed to the call stack
+                    resolve('hyderabad mausam is good')
+                }, 3000)
+            })
+            console.log(delhiMausam);       //the value is printed at t = 3000ms
+            console.log(hyderabadMausam);       //the value is printed at t = 3000ms
+
+            // let dM = delhiMausam;     //the await keyword is used to wait for the promise to be resolved or rejected
+            // console.log(dM);                //the value is printed at t = 3000ms
+            // let hM = hyderabadMausam; //the await keyword is used to wait for the promise to be resolved or rejected
+            // console.log(hM);                //the value is printed at t = 6000ms
+            // return [dM, hM];                //the values are returned
+        }
+        async function myFunction() {       //async function is declared
+            console.log("hello A")
+            console.log("hello B")
+            const response = await fetch("./student_data.json")   //await keyword is used to wait for the promise to be resolved or rejected, till then the synchronous code is executed
+            const students = await response.json();
+            console.log(students[0].name)
+            console.log("hello C")
+            return students;
+        }
+
+        console.log("hello D")
+        const st = myFunction();       //the async function is called
+        console.log("hello E")
+        console.log(st)
+    </script>
+</body>
+
+</html>

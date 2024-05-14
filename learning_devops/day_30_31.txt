@@ -1,0 +1,58 @@
+//learning kubernetes
+-> difference between kubernetes and docker 
+- docker is having problem of auto scaling , auto healing, enterprise level nature - {firewall, load balancer, security, etc}
+
+-> kubernetes is a cluster of group of nodes , which is having one master node and multiple worker nodes
+- solving auto scaling - we just need to add more worker nodes, using the yaml file.
+- solving auto healing - if one node is about to go down , then the master node will automatically create a new node and add it to the cluster
+- solving enterprise level security - kubernetes is having a feature of RBAC (role based access control) , which is used to give access to the users to the cluster
+- load balancer - kubernetes is having a feature of load balancer , which is used to distribute the load on the worker nodes
+- service discovery - it is used to discover the services in the cluster
+
+-> architecture of kubernetes
+- A master and its controlled nodes(worker nodes) constitute a “Kubernetes cluster”.
+  as shown in the image : k8s_architecture.jpg
+
+- master node(control plane) - it is having 4 components
+1. kube-apiserver - The API server is the entry point for all the REST 
+   commands used to control the cluster. All the administrative tasks 
+   are done by the API server within the master node. If we want to 
+   create, delete, update or display in Kubernetes object it has to 
+   go through this API server.API server validates and configures the 
+   API objects such as ports, services, replication, controllers, and 
+   deployments and it is responsible for exposing APIs for every operation. 
+   We can interact with these APIs using a tool called kubectl.
+   kubectl is a command-line interface for running commands against Kubernetes clusters.
+
+2. etcd - it is a key value pair database , which is used to store the data of the cluster
+   at any point of time and and is also used to store the configuration 
+   details such as subnets, config maps, etc.
+
+3. kube-controller-manager - the controller watches the desired state of 
+   the cluster if the current state of the cluster does not meet the 
+   desired state then the control loop takes the corrective steps to 
+   make sure that the current state is the same as that of the desired 
+   state. The key controllers are the replication controller, endpoint 
+   controller, namespace controller, and service account controller. 
+
+4. kube-scheduler - It is responsible for tracking the utilization of the 
+   working load of each worker node and then placing the workload on 
+   the node where resources are available and can accept the workload.
+   basically it is used to schedule the pods on the new worker nodes.
+
+- worker node - it is having 3 components
+1. kubelet - It is a primary node agent which communicates with the master
+   node and gets the pod specifications through the API server and executes 
+   the container associated with the pods and ensures that the containers 
+   described in the pods are running and healthy.
+
+2. kube-proxy - maintains the distributed network across all the nodes, 
+   pods, and containers and exposes the services across the outside world.
+
+3. container runtime - it is used to run the containers. example - docker, containerd, etc.
+
+4. Pods - It is a group of containers that are deployed together on the 
+   same host. With the help of pods, we can deploy multiple dependent 
+   containers together so it acts as a wrapper around these containers 
+   so we can interact and manage these containers primarily through pods. 
+

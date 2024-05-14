@@ -1,0 +1,24 @@
+=> Long term capital gain (LTCG) - if a person holds a share for more than 12 months, then the gain 
+        arising on sale of such share is called long term capital gain. Such gain is exempt from tax 
+        if STT is paid on such transaction. If STT is not paid, then such gain is taxable at 10% 
+        (without indexation) or 20% (with indexation).
+=> face value - is the price the company can sell its shares for when it issues them.
+=> issue price - the price , the company offers to the public for the first time through an IPO.
+=> listed price - the price at which a share is traded on the stock exchange.
+=> bonus shares - shares issued by a company to its shareholders for free. 
+        The company issues such shares from its accumulated profits.
+=> stock split - is a corporate action in which a company divides its existing shares into multiple shares
+        to boost the liquidity of the shares. Although the number of shares outstanding increases by a 
+        specific multiple, the total dollar value of the shares remains the same compared to pre-split amounts, 
+        because the split does not add any real value.
+=> last traded price - is the price at which the last trade took place.
+
+=> understanding the indian stock market 
+    bse and nse opens at 9:15 am and closes at 3:30 pm, monday to friday. during this time, the market is open for trading.
+    the market is closed on saturday and sunday. 
+    during this time, people can place orders to buy or sell shares.
+   after market orders(AMO) - orders placed after the market closes. these orders are executed when the market opens the next day.
+    based on this AMOs , the opening price of the stock is decided, if the opening price is higher than the last day's closing price, 
+    then the stock is said to have opened at a gap up. if the opening price is lower than the last day's closing price, then the stock
+        is said to have opened at a gap down.
+    

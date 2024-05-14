@@ -1,0 +1,40 @@
+Learning angular 
+
+-> firstly install the angular cli by the command: 
+   npm install -g @angular/cli
+
+-> then create a new project by the command:
+    ng new my-first-app
+
+-> then go to the project directory by the command:
+    cd my-first-app
+
+-> then run the project by the command:
+    ng serve -o
+
+-> then install bootstrap by the command:
+    npm install bootstrap
+
+-> then go to the angular.json file and add the path of the bootstrap file in the styles array and scripts array of architect->build object.
+
+-> to generate components use the command:
+    ng generate component component-name
+    
+-> to generate services use the command:
+    ng generate service service-name
+
+-> to generate modules use the command:
+    ng generate module module-name
+
+-> to generate directives use the command:
+    ng generate directive directive-name
+
+-> to generate pipes use the command:
+    ng generate pipe pipe-name
+
+-> to generate guards use the command:
+    ng generate guard guard-name
+
+-> to generate interfaces use the command:
+    ng generate interface interface-name
+

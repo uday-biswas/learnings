@@ -1,0 +1,68 @@
+//creating a new ec2 instance in aws manually
+login to aws console, go to services, click on ec2, click on launch instance.
+now give a name, select ubuntu server, select t2.micro(free) , create a new key pair and download it, click on launch instance.
+now click on view instances, select the instance and click on instance state, click on start instance.
+
+//connecting to ec2 instance
+open terminal, go to the directory where the key pair is downloaded, run the following command
+chmod 600 test1.pem    sssssss        //change the permission of the key pair file to 600
+ssh -i test.pem ubuntu@107.20.44.113   //test.pem is the key pair file, 107.20.44.113 is the public ip of the instance
+
+type exit and enter to disconnect from the instance.
+
+//connecting to ec2 using aws cli (aws command line interface)
+go to aws console, click on profile dropdown and click on my security credentials, 
+click on access keys, click on create new access key, download the csv file. it contains access key id and secret access key.
+open terminal, run the following commands
+aws configure
+-> it will ask for access key id, secret access key, region and output format
+-> command to get the list of instances - aws ec2 describe-instances
+-> command to create a new ec2 instance - 
+    aws ec2 run-instances --image-id <AMI_ID> --instance-type <INSTANCE_TYPE> --key-name <KEY_PAIR_NAME> --subnet-id <SUBNET_ID> --security-group-ids <SECURITY_GROUP_ID> --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=<INSTANCE_NAME>}]'
+Replace the placeholders (<AMI_ID>, <INSTANCE_TYPE>, <KEY_PAIR_NAME>, <SUBNET_ID>, <SECURITY_GROUP_ID>, <INSTANCE_NAME>) with your actual values.
+example -  aws ec2 run-instances --image-id ami-0fc5d935ebf8bc3bc --instance-type t2.micro --key-name test1 --security-group-ids sg-06722820766cb000c --subnet-id subnet-0e7a32b3770b931fa --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=MyFirstInstance}]'
+-> command to stop an instance - aws ec2 stop-instances --instance-ids <INSTANCE_ID>
+-> command to terminate an instance - aws ec2 terminate-instances --instance-ids <INSTANCE_ID>
+-> command to start an instance - aws ec2 start-instances --instance-ids <INSTANCE_ID>
+
+//connecting to virtual machine of azure
+go to azure portal, click on virtual machines, create one.
+now start the virtual machine, then go to directory where the key pair is kept, run the following command:
+ssh -i skillquake_key.pem azureuser@20.224.165.213  //test1.pem is the key pair file, azureuser is the username, and 20.224.165.213 is the public ip of the virtual machine.
+-> after use type exit and enter to disconnect from the virtual machine, and then stop the virtual machine.
+
+
+example shell scripting program for listing aws instances
+create a file with .sh extension and paste the below code and save it.
+then give permission to the file using chmod 700 filename.sh
+and run the file using ./filename.sh
+
+############
+#AUTHOR : UDAY
+# DATE : 02-02-2024
+# SCRIPT FOR LISTING AWS INSTANCES
+#############
+
+#listing all s3 buckets
+echo "Printing list of s3 buckets"
+aws s3 ls
+
+#listing all ec2 instance's ID only
+echo "Printing list of ec2 instances"
+aws ec2 describe-instances --query 'Reservations[].Instances[].InstanceId'
+
+
+//deploying first app in aws
+-> login to aws console, go to IAM, go to users, create a user, give a username
+, tick on provide user access to aws management console, give a custom password,
+untick on require password reset, click on next, tick on attach existing policies directly,
+search for administrator access, tick on it, click on next, click on create user,
+download the csv file, click on close, click on users, click on the user, click on security credentials,
+get the url of the console login, login with the username and password, click on services,
+click on ec2, click on launch instance, create a new ubuntu ec2 instance.
+-> connect to the instance using ssh, install nodejs, install npm.
+-> clone the project from github, provide .env file, run npm install, run the project.
+-> go to security groups, click on the security group, click on inbound, click on edit inbound rules, click on add rule,
+select tcp, select port range 3000, select source anywhere, click on save rules.
+-> go to elastic ip, click on allocate new address, click on allocate, click on actions, click on associate address,
+select the instance, click on associate, copy the public ip, paste it in the browser, the app will be running.

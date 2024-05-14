@@ -1,0 +1,95 @@
+//docker networking
+list the networks in docker with commmand: docker network ls 
+
+//example of using frontend and backend with mongodb docker image and 
+  connecting them using docker network.
+  -> create a network with a command :
+     docker network create mongo-network
+
+  -> run the mongodb image with the network created above: 
+     docker run -p 27017:27017 \
+     -e MONGO_INITDB_ROOT_USERNAME=admin \
+     -e MONGO_INITDB_ROOT_PASSWORD=password \
+     --name mongodb \
+     --network mongo-network \
+     -d mongo
+
+  -> run the mongo-express image with the network created above:
+  //docker compose takes care of creating a common network for all the containers
+     docker run -p 8081:8081 \
+     -e ME_CONFIG_MONGODB_ADMINUSERNAME=admin \
+     -e ME_CONFIG_MONGODB_ADMINPASSWORD=password \
+     --network mongo-network \
+     --name mongo-express \
+     -e ME_CONFIG_MONGODB_SERVER=mongodb \
+     -d mongo-express
+
+   -> the equivalent docker-compose file for the above commands is:
+      version: '3.1'
+      services:
+        mongodb:             //container name
+          image: mongo
+          environment:
+            MONGO_INITDB_ROOT_USERNAME=admin
+            MONGO_INITDB_ROOT_PASSWORD=password
+          ports:
+            - 27017:27017        //host:container
+        mongo-express:
+          image: mongo-express
+          environment:
+            ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+            ME_CONFIG_MONGODB_ADMINPASSWORD=password
+            ME_CONFIG_MONGODB_SERVER=mongodb
+          ports:
+            - 8081:8081
+
+  -> now run the docker-compose file with the command: docker-compose -f mongo.yaml up
+  -> and open the mongo-express in the browser with the url: localhost:8081
+
+   -> now in the backend connect to the mongodb using the string:
+      mongodb://admin:password@mongodb:27017
+
+// learning about volumes in docker
+
+-> volumes are used to persist the data even after the container is deleted.
+There are three types of volumes in docker:
+1. host volumes: these are the volumes that are created on the host machine and are mounted to the container.
+-> command to create a host volume: docker run -v <host-path>:<container-path> <image-name>
+   example: docker run -v /home/mount/data:/var/lib/mysql/data <image-name>
+
+2. anonymous volumes: for each container a folder is generated that gets mounted on the host machine.
+-> command to create an anonymous volume: docker run -v <container-path> <image-name>
+   example: docker run -v /var/lib/mysql/data <image-name>
+
+3. named volumes: these are the volumes that are created by the user and are mounted to the container.
+-> command to create a named volume: docker run -v <volume-name>:<container-path> <image-name>
+   example: docker run -v mysql-data:/var/lib/mysql/data <image-name>
+
+-> example of using named volumes in docker-compose file:
+version: "3"
+services:
+  mongodb:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+      #for mysql, mysql-data:var/lib/mysql
+      #for postgres, postgres-data:var/lib/postgresql/data
+  mongo-express:
+    image: mongo-express
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+    ports:
+      - 8081:8081
+volumes:
+  mongo-data:
+    driver: local
+
+-> the volume data gets stored in the /var/lib/docker/volumes folder in the host machine for linux,
+C:\ProgramData\Docker\volumes for windows and /var/lib/docker/volumes for mac.
