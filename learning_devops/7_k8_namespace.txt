@@ -1,0 +1,15 @@
+//learning namespace in kubernetes
+namespace is basically a virtual cluster inside the main cluster, it is used to divide
+the cluster resources based on different use cases or teams.
+there are four default namespaces in kubernetes: default, kube-system, kube-public, kube-node-lease.
+
+command to create a namespace: kubectl create namespace <namespace-name>
+command to list all the namespaces: kubectl get namespaces
+command to delete a namespace: kubectl delete namespace <namespace-name>
+
+command to create a deployment in a specific namespace: kubectl apply -f <deployment-file> --namespace=<namespace-name>
+command to get all the resources in a specific namespace: kubectl get all --namespace=<namespace-name>
+command to get all the deployments in a specific namespace: kubectl get deployments --namespace=<namespace-name>
+
+-> we can include the namespace in the kubectl config file so that we don't have to 
+specify the namespace everytime we run a command. 

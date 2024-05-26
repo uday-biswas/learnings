@@ -1,0 +1,76 @@
+devops is a process of improving the application delivery, it focuses on automation, 
+ quality, continous monitoring , continous testing and continous integration. 
+
+=> virtual machine - a virtual machine is a software that creates a virtual environment 
+                between the computer platform and the end user in which the end user 
+                can operate software and applications.
+=>  shell scripting - using shell scripts we can automate the process of installing 
+                      and configuring the software in the virtual machine.
+    => pwd - present working directory , it gives the path of the current directory.
+    => ls - list the files and directories in the current directory.
+       => ls -a - list all the files and directories including hidden files and directories.
+       => ls -ltr - list the files and directories in the current directory along with the 
+                    permissions, size, date and time of creation.
+    => cd - change directory , it is used to change the directory.
+            eg. cd /home/username, cd .. - to go back to the previous directory, 
+                cd ../.. - to go back to the previous to previous directory.
+    => mkdir - make directory , it is used to create a directory(folder). 
+                eg. mkdir devops - to create a directory named devops.
+    => touch - it is used to create a file.
+                eg. touch devops.txt - to create a file named devops.txt.
+    => cat - it is used to display the content of the file. 
+                eg. cat devops.txt - to display the content of the file named devops.txt.
+    => vi - it is used to edit the content of the file.
+    => rm - it is used to remove the file.
+                eg. rm devops.txt - to remove the file named devops.txt.
+    => rmdir or rm -r  - it is used to remove the directory.
+    => cp - it is used to copy the file.
+                eg. cp devops.txt devops1.txt - to copy the file named devops.txt to devops1.txt.
+    => mv - it is used to move the file.
+                eg. mv devops.txt devops1.txt - to move the file named devops.txt to devops1.txt.
+    => chmod - it is used to change the permissions of the file.
+               octal mode - 0 - no permission, 1 - execute, 2 - write, 3 - write and execute, 
+                            4 - read, 5 - read and execute, 6 - read and write, 7 - read, write and execute.
+                first digit - owner, second digit - group, third digit - others.
+                eg. chmod 777 devops.txt - to give all the permissions to the file named devops.txt.
+                    chmod 755 devops.txt - to give read, write and execute permissions to the owner 
+                                           and read and execute permissions to the group and others.
+    => free - it is used to display the free memory in the system.
+    => df - it is used to display the free disk space in the system.
+       => df h - it is used to display the free disk space in human readable format.
+    => top - it is used to display the processes running in the system.
+    => nproc - it is used to display the number of processors in the system.
+    
+    => vi editor basics
+      => i - insert mode(for writing or editing the content)
+      => esc - command mode(for writing commands)
+      the commands in the command mode are
+         => :wq - (w - write, q- quit) to save and exit
+         => :q! - to exit without saving
+         => :w - to save
+         => :q - to exit
+         => :wq! - to save and exit forcefully
+         => dd - to delete a line
+         => yy - to copy a line
+         => p - to paste a line
+         => u - to undo
+         => ctrl + r - to redo
+         => / - to search
+         => n - to search next
+         => N - to search previous
+         => :set number - to display line numbers
+         => :set nonumber - to hide line numbers
+         => :set ic - to ignore case while searching
+         => :set noic - to consider case while searching
+         => :set hls - to highlight the search results
+         => :set nohls - to remove the highlight of the search results
+         => :set bg=dark - to change the background color to dark
+         => :set bg=light - to change the background color to light
+         => :syntax on - to enable syntax highlighting
+         => :syntax off - to disable syntax highlighting
+         => :set mouse=a - to enable mouse
+         => :set mouse= - to disable mouse
+
+-> commands to install latest nodejs:
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt-get install nodejs

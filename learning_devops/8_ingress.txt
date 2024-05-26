@@ -1,0 +1,46 @@
+//learning ingress
+-> problems with kubernetes 
+   - Enterprise & TLS load balancing
+
+-> what is ingress
+   ingress is a kubernetes object that allows access to your kubernetes services from outside the kubernetes cluster.
+   
+-> ingress controller is needed for ingress to work. 
+ingress controller is a daemon, deployed as a kubernetes pod, 
+that watches the apiserver's /ingresses endpoint for updates to the 
+ingress resource. its job is to satisfy requests for ingress.
+ 
+- command to install minikube nginx ingress controller is minikube addons enable ingress
+- command to check the status of ingress controller is kubectl get pods -n ingress-nginx
+- make a ingress.yml file and apply it using kubectl apply -f ingress.yml
+  - example content of ingress.yml file
+        apiVersion: networking.k8s.io/v1
+        kind: Ingress
+        metadata:
+        name: ingress-example
+        spec:
+        rules:
+        - host: "foo.bar.com"
+            http:
+            paths:
+            - pathType: Prefix
+                path: "/bar"
+                backend:
+                service:
+                    name: python-app
+                    port:
+                    number: 80
+
+- command to check the status and ip address of the ingress is kubectl get ingress
+- edit the /etc/hosts file and add the ip address of the ingress and the host name of the ingress - 192.168.49.2    foo.bar.com
+- now you can access the application using the host name foo.bar.com/bar
+
+//learning RBAC(role based access and control) for kubernetes
+-> it is used to provide access to different services according to their roles.
+-> mainly there are 3 things to be controlled by the RBAC 
+   - service account / user account 
+   - Roles / cluster role
+   - Role binding / cluster role binding
+
+-> to get 30 days free trial, open openshift sandbox, and make a red hat account
+   login there and launch a sandbox.

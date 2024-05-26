@@ -1,0 +1,41 @@
+//learning to manage kubernetes cluster using kops
+for kops , we can use our root user or iam user.
+- for iam user , we need to create a user with following permissions
+  - AmazonEC2FullAccess
+  - AmazonRoute53FullAccess
+  - AmazonS3FullAccess
+  - IAMFullAccess
+  - AmazonVPCFullAccess
+  - AmonzonSQSFullAccess
+  - AmonEventBridgeFullAccess
+
+-> go to IAM -> users -> create user -> give name -> tick the 'provide user access to aws management console' box -> 
+select 'i want to create an IAM user' -> generate a custom password ->
+click on next -> click on 'attach policies directly' -> search for above policies and tick them -> create user -> download csv file
+
+-> now login to aws cli using this user, by firstly creating access key and secret key for this user in security credentials tab
+   - then in the terminal type 'aws configure' -> enter the access key and secret key -> enter the region(eg. us-east-1a) -> enter the output format(json)
+
+-> create a s3 bucket for storing the state of the cluster
+  - command -> aws s3api create-bucket --bucket new-bucket --region us-east-1
+  - command for versioning -> aws s3api put-bucket-versioning --bucket new-bucket --versioning-configuration Status=Enabled
+
+-> set up a few environment variables to make the process easier.
+  - export NAME=myfirstcluster.k8s.local
+  - export KOPS_STATE_STORE=s3://new-bucket
+
+-> create a cluster configuration
+  - kops create cluster --name=${NAME} --cloud=aws --zones=us-east-1a \
+    --node-count=1 --node-size=t2.medium --control-plane-size=t2.medium  --control-plane-volume-size=8 --node-volume-size=8
+
+-> create the cluster
+  - kops update cluster --name ${NAME} --yes --admin
+
+-> validate the cluster
+  - kops validate cluster
+
+-> list the nodes
+  - kubectl get nodes
+
+-> delete the cluster
+  - kops delete cluster --name ${NAME} --yes
